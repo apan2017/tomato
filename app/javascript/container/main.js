@@ -1,8 +1,10 @@
+require('./main.scss')
+
 import m from 'mithril'
 
 const view = vnode => {
   return(
-    <div className="container">
+    <div className="main-container container">
       {vnode.children}
     </div>
   )
