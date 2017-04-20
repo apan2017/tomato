@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
 
   def index
-    @tasks = Task.todo
+    @tasks = Task.todo.order(id: :desc)
   end
 
   def create
