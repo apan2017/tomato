@@ -4,25 +4,25 @@ import {update, setDone} from 'state/task'
 
 const oninit = vnode => {
   const state = vnode.state
-  const task = vnode.attrs.task
 
   state.isEditing = stream(false)
-  state.content = stream(task.content)
+  state.content = stream()
 
   state.startEdit = e => {
     state.isEditing(true)
   }
 
-  state.autoFocus = targetVnode => {
+  state.autoFocus = (task, targetVnode) => {
     targetVnode.dom.focus()
-  }
-
-  state.stopEdit = e => {
-    state.isEditing(false)
     state.content(task.content)
+    m.redraw()
   }
 
-  state.updateTask = e => {
+  state.stopEdit = task => {
+    state.isEditing(false)
+  }
+
+  state.updateTask = (task, e) => {
     if (e.keyCode === 13) {
       update(task.id, state.content())
       .then(() => {
@@ -41,7 +41,8 @@ const view = vnode => {
     <li>
       <input type="checkbox" checked={false} onclick={() => setDone(task.id)} />
       {state.isEditing() ? 
-        <input type="text" oncreate={state.autoFocus} onblur={state.stopEdit} onkeypress={state.updateTask}
+        <input type="text" oncreate={vnode => state.autoFocus(task, vnode)}
+          onblur={e => state.stopEdit(task)} onkeypress={e => state.updateTask(task, e)}
           value={state.content()} oninput={m.withAttr('value', state.content)} /> : 
         <span onclick={state.startEdit}>{task.content}</span>}
     </li>
