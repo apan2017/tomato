@@ -38,3 +38,58 @@
   margin-top: -10px;
   z-index: 100;
 }
+
+.clock-content {
+  height: 200px;
+  overflow-y: auto;
+}
+
+.clock-content--empty {
+  height: 100%;
+  line-height: 200px;
+  text-align: center;
+  font-size: 26px;
+  color: #ddd;
+}
+
+.clock-content--block {
+
+}
+
+.clock-content--header {
+  line-height: 25px;
+}
+
+.clock-content--date {
+  font-size: 18px;
+  font-weight: bold;
+  color: #bbb;
+}
+
+.clock-content--total {
+  color: #999;
+}
+
+.clock-content--list {
+  margin: 0;
+  padding-left: 20px;
+  > li {
+    margin: 10px;
+  }
+}
+
+.clock-content--start, .clock-content--end {
+  color: #999;
+}
+
+.clock-content--start {
+  margin-right: 5px;
+}
+
+.clock-content--end {
+  margin-left: 5px;
+}
+
+.clock-content--description {
+  margin-left: 1em;
+}
