@@ -1,7 +1,7 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
 import moment from 'moment'
-import Form from './form'
+
 import {startTime, endTime, TICKS, isTicking, isTickDone} from 'state/tick'
 
 const oninit = vnode => {
@@ -56,10 +56,6 @@ const oninit = vnode => {
 }
 
 const view = vnode => {
-  if (isTickDone()) {
-    return <Form></Form>
-  }
-
   return(
     <div class="progress clock-progress">
       <a onclick={vnode.state.stopAClock} href="javascript:void(0);" className="clock-progress--close">x</a>

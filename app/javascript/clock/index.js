@@ -5,7 +5,8 @@ import stream from 'mithril/stream'
 import {clock as Container} from 'container'
 import Process from './process'
 import Content from './content'
-import {isTicking} from 'state/tick'
+import Form from './form'
+import {isTicking, isTickDone} from 'state/tick'
 
 const oninit = vnode => {
   const state = vnode.state
@@ -16,11 +17,15 @@ const oninit = vnode => {
 }
 
 const renderHeader = vnode => {
+  if (isTickDone()) {
+    return <Form></Form>
+  }
+
   if (isTicking()) {
     return <Process></Process>
-  } else {
-    return <button onclick={vnode.state.startAClock} className="btn btn-default clock-btn clock-btn---start">Start</button>
   }
+  
+  return <button onclick={vnode.state.startAClock} className="btn btn-default clock-btn clock-btn---start">Start</button>
 }
 
 const view = vnode => {
