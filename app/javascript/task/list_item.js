@@ -1,6 +1,6 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
-import {update} from 'state/task'
+import {update, setDone} from 'state/task'
 
 const oninit = vnode => {
   const state = vnode.state
