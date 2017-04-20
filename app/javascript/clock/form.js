@@ -1,15 +1,12 @@
 import m from 'mithril'
-import {isTicking, isTickDone, description} from 'state/tick'
+import {create, description, startTime, endTime} from 'state/tick'
 
 const oninit = vnode => {
   const state = vnode.state
   
   state.submit = e => {
     if (e.keyCode === 13) {
-      alert(description())
-
-      isTicking(false)
-      isTickDone(false)
+      create()
     }
   }
 
@@ -30,6 +27,8 @@ const view = vnode => {
 
 const onremove = vnode => {
   description('')
+  startTime(null)
+  endTime(null)
 }
 
 export default {

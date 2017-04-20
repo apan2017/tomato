@@ -1,25 +1,47 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
+import moment from 'moment'
+
+export const TICKS = 25 * 60
 
 export const isTicking = stream(false)
 export const isTickDone = stream(false)
 export const description = stream('')
 
-let item1 = {
-  created_data: '4月20日',
-  total_count: 1,
-  list: [
-    {
-      start_time: '16:01',
-      end_time: '16:28',
-      description: '完成tick后显示表单'
-    },
-    {
-      start_time: '16:01',
-      end_time: '16:28',
-      description: '完成tick后显示表单'
-    }
-  ]
+export const startTime = stream()
+export const endTime = stream()
+
+export const todayClocks = stream()
+
+export const loadTodayClocks = () => {
+  m.request({
+    method: 'GET',
+    url: '/clocks/today.json'
+  })
+  .then(data => {
+    todayClocks(data)
+  })
 }
 
-export const list = stream([item1])
+export const create = () => {
+  const data = {
+    clock: {
+      description: description(),
+      start_at: startTime(),
+      end_at: endTime()
+    }
+  }
+
+  m.request({
+    method: 'POST',
+    url: '/clocks',
+    data: data,
+    config: xhr => xhr.setRequestHeader('X-CSRF-Token', window.CSRF.token)
+  })
+  .then(() => {
+    isTicking(false)
+    isTickDone(false)
+    
+    loadTodayClocks()
+  })
+}

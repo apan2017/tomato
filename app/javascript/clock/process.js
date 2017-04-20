@@ -1,11 +1,12 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
+import moment from 'moment'
 import Form from './form'
-import {isTicking, isTickDone} from 'state/tick'
-
-const TICKS = 25 * 60
+import {startTime, endTime, TICKS, isTicking, isTickDone} from 'state/tick'
 
 const oninit = vnode => {
+  startTime(moment().format())
+
   const state = vnode.state
 
   state.ticks = stream(TICKS)
@@ -33,6 +34,7 @@ const oninit = vnode => {
     } else {
       state.ticks(0)
       setTimeout(() => {
+        endTime(moment().format())
         isTickDone(true)
       }, 0)
     }

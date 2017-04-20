@@ -2,8 +2,13 @@
 <html>
   <head>
     <title>Tomato</title>
-    <%= csrf_meta_tags %>
     <%= stylesheet_pack_tag 'application' %>
+    <script>
+      window.CSRF = {
+        param: <%= raw request_forgery_protection_token.to_s.inspect %>,
+        token: <%= raw form_authenticity_token.to_s.inspect %>
+      }
+    </script>
   </head>
 
   <body>
