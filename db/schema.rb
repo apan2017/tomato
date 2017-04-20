@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170420094906) do
+ActiveRecord::Schema.define(version: 20170420154700) do
 
   create_table "clocks", force: :cascade do |t|
     t.text     "description"
@@ -18,6 +18,13 @@ ActiveRecord::Schema.define(version: 20170420094906) do
     t.datetime "end_at"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.text     "content",    default: ""
+    t.boolean  "is_done",    default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
 end

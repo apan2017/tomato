@@ -1,10 +1,10 @@
-require('./clock.scss')
+require('./task.scss')
 
 import m from 'mithril'
 
 const view = vnode => {
   return(
-    <div className="clock-container col-lg-6">
+    <div className="task-container col-lg-6">
       {vnode.children}
     </div>
   )
@@ -13,3 +13,4 @@ const view = vnode => {
 module.exports = {
   view
 }
+

@@ -3,11 +3,19 @@ window.$ = window.jQuery =require('jquery/dist/jquery.js')
 require('bootstrap/dist/js/bootstrap.js')
 
 import m from 'mithril'
-import {main} from 'container'
-import clock from 'clock'
+import {main as Main} from 'container'
+import Clock from 'clock'
+import Task from 'task'
 
 m.mount(document.querySelector('#main'), {
   view: vnode => {
-    return m(main, m(clock))
+    return(
+      <Main>
+        <div className="row">
+          <Clock></Clock>
+          <Task></Task>
+        </div>
+      </Main>
+    )
   }
 })

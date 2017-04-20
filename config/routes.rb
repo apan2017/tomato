@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   resources :clocks do
     get :today, on: :collection
   end
+
+  resources :tasks do
+    patch :done, on: :member
+  end
 end

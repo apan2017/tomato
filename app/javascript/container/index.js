@@ -1,4 +1,5 @@
 module.exports = {
   main: require('./main'),
-  clock: require('./clock')
+  clock: require('./clock'),
+  task: require('./task')
 }

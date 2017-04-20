@@ -1,0 +1,33 @@
+.task-header {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: solid #eee 1px;
+}
+
+.task-content {
+  height: 200px;
+  overflow-y: auto;
+}
+
+.task-content--empty {
+  height: 100%;
+  line-height: 200px;
+  text-align: center;
+  font-size: 26px;
+  color: #ddd;
+}
+
+.task-content--list {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+  li {
+    margin: 10px 0 10px 0;
+    padding-bottom: 10px;
+    border-bottom: solid #eee 1px;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 5px;
+  }
+}
