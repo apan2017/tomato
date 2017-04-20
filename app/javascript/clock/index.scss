@@ -6,9 +6,35 @@
 
 .clock-btn {
   width: 100%;
-  &.clock-btn--start {
+  &.clock-btn---start {
   }
-  &.clock-btn--process {
-    height: 34px;
+}
+
+.clock-progress {
+  height: 34px !important;
+  position: relative;
+  margin-bottom: 0 !important;
+  > div {
+    line-height: 34px;
+    height: 100%;
+    background-color: #bbb !important;
   }
+}
+
+.clock-progress--tick {
+  display: block;
+  width: 100%;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  font-weight: bold;
+  line-height: 34px;
+}
+
+.clock-progress--close {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -10px;
+  z-index: 100;
 }
