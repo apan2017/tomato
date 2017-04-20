@@ -6,10 +6,8 @@ import m from 'mithril'
 import {main} from 'container'
 import clock from 'clock'
 
-m.route(document.querySelector('#main'), '/', {
-  '/': {
-    render: vnode => {
-      return m(main, m(clock))
-    }
+m.mount(document.querySelector('#main'), {
+  view: vnode => {
+    return m(main, m(clock))
   }
 })

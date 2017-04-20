@@ -27,21 +27,32 @@ const oninit = vnode => {
 
   state.countProgressPercent = state.ticks.map(v => (TICKS - v) / TICKS * 100)
 
+  let currentTime = (new Date()).getTime()
+
   state.countDownTicks = () => {
     const tick = state.ticks()
-    if (tick > 1) {
-      state.ticks(tick - 1)
+
+    let oldTime = currentTime
+    currentTime = (new Date()).getTime()
+
+    if (tick > 0) {
+      state.ticks(tick - Math.round((currentTime - oldTime) / 1000))
+
+      clearTimeout(state.timer)
+      state.timer = setTimeout(state.countDownTicks, 1000)
     } else {
       state.ticks(0)
       setTimeout(() => {
         endTime(moment().format())
         isTickDone(true)
+        
+        m.redraw()
       }, 0)
     }
     m.redraw()
   }
 
-  state.interval = setInterval(state.countDownTicks, 1000)
+  state.timer = setTimeout(state.countDownTicks, 1000)
 }
 
 const view = vnode => {
@@ -61,7 +72,7 @@ const view = vnode => {
 }
 
 const onremove = vnode => {
-  clearInterval(vnode.state.interval)
+  clearTimeout(vnode.state.timer)
 }
 
 export default {
