@@ -4,7 +4,7 @@ class ClocksController < ApplicationController
   end
 
   def today
-    @clocks = Clock.where('created_at > ?', Date.today).order(:id)
+    @clocks = Clock.where('created_at > ?', Date.today).order(id: :desc)
   end
 
   def create
