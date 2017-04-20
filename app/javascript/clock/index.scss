@@ -1,0 +1,14 @@
+.clock-header {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: solid #eee 1px;
+}
+
+.clock-btn {
+  width: 100%;
+  &.clock-btn--start {
+  }
+  &.clock-btn--process {
+    height: 34px;
+  }
+}

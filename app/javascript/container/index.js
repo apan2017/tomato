@@ -1,0 +1,4 @@
+module.exports = {
+  main: require('./main'),
+  clock: require('./clock')
+}
