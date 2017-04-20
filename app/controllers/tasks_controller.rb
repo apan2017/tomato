@@ -14,6 +14,16 @@ class TasksController < ApplicationController
     end
   end
 
+  def update
+    @task = Task.find params[:id]
+
+    if @task.update params.require(:task).permit(:content)
+      head :ok
+    else
+      head :internal_server_error
+    end
+  end
+
   def done
     @task = Task.find params[:id]
     @task.is_done = true

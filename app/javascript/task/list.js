@@ -1,6 +1,7 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
 import {list, loadList, setDone} from 'state/task'
+import ListItem from './list_item'
 
 const oninit = vnode => {
   loadList()
@@ -13,8 +14,8 @@ const view = vnode => {
 
   return(
     <ul className="task-content--list">
-      {list().map(v => {
-        return <li><input type="checkbox" checked={false} onclick={() => setDone(v.id)} /> {v.content}</li>
+      {list().map(task => {
+        return <ListItem task={task}></ListItem>
       })}
     </ul>
   )

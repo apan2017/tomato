@@ -33,8 +33,22 @@ export const create = () => {
   })
 }
 
-export const update = () => {
+export const update = (id, content) => {
+  const data = {
+    task: {
+      content: content
+    }
+  }
 
+  return m.request({
+    method: 'PUT',
+    url: `/tasks/${id}`,
+    data: data,
+    config: xhr => xhr.setRequestHeader('X-CSRF-Token', window.CSRF.token)
+  })
+  .then(() => {
+    loadList()
+  })
 }
 
 export const setDone = id => {
