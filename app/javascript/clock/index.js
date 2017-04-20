@@ -4,20 +4,19 @@ import m from 'mithril'
 import stream from 'mithril/stream'
 import {clock as Container} from 'container'
 import Process from './process'
+import {isTicking} from 'state/tick'
 
 const oninit = vnode => {
   const state = vnode.state
 
-  state.isTicking = stream(false)
-
   state.startAClock = e => {
-    state.isTicking(true)
+    isTicking(true)
   }
 }
 
 const renderHeader = vnode => {
-  if (vnode.state.isTicking()) {
-    return <Process isTicking={vnode.state.isTicking}></Process>
+  if (isTicking()) {
+    return <Process></Process>
   } else {
     return <button onclick={vnode.state.startAClock} className="btn btn-default clock-btn clock-btn---start">Start</button>
   }

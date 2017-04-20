@@ -1,5 +1,7 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
+import Form from './form'
+import {isTicking, isTickDone} from 'state/tick'
 
 const TICKS = 25 * 60
 
@@ -9,7 +11,7 @@ const oninit = vnode => {
   state.ticks = stream(TICKS)
 
   state.stopAClock = e => {
-    vnode.attrs.isTicking(false)
+    isTicking(false)
   }
   
   state.showTick = state.ticks.map(v => {
@@ -30,7 +32,9 @@ const oninit = vnode => {
       state.ticks(tick - 1)
     } else {
       state.ticks(0)
-      setTimeout(() => vnode.attrs.isTicking(false), 0)
+      setTimeout(() => {
+        isTickDone(true)
+      }, 0)
     }
     m.redraw()
   }
@@ -39,6 +43,10 @@ const oninit = vnode => {
 }
 
 const view = vnode => {
+  if (isTickDone()) {
+    return <Form></Form>
+  }
+
   return(
     <div class="progress clock-progress">
       <a onclick={vnode.state.stopAClock} href="javascript:void(0);" className="clock-progress--close">x</a>
