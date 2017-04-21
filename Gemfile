@@ -37,3 +37,5 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'webpacker', github: 'rails/webpacker'
 end
+
+gem 'sorcery'

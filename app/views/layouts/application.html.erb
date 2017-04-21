@@ -2,7 +2,13 @@
 <html>
   <head>
     <title>Tomato</title>
-    <%= stylesheet_pack_tag 'application' %>
+
+    <% if content_for? :style %>
+      <%= yield :style %>
+    <% else %>
+      <%= stylesheet_pack_tag 'application' %>
+    <% end %>
+
     <script>
       window.CSRF = {
         param: <%= raw request_forgery_protection_token.to_s.inspect %>,
@@ -13,6 +19,10 @@
 
   <body>
     <%= yield %>
-    <%= javascript_pack_tag 'application' %>
+    <% if content_for? :script %>
+      <%= yield :script %>
+    <% else %>
+      <%= javascript_pack_tag 'application' %>
+    <% end %>
   </body>
 </html>

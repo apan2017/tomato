@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body, #main {
+  height: 100%;
+  margin: 0;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #efefef;
+}
+
+.sign-container {
+  width: 500px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, .1);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-tabs {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-direction: row;
+  justify-content: space-between;
+  li {
+    flex-grow: 1;
+    text-align: center;
+    padding: 20px 0;
+    cursor: pointer;
+    background-color: #f7f7f7;
+    color: #999;
+    &.active {
+      background-color: #fff;
+    }
+  }
+}
+
+.sign-content {
+  flex-grow: 1;
+  padding: 20px;
+
+  input {
+    border-radius: 0;
+  }
+
+  .btn.btn-default {
+    border-radius: 0;
+  }
+}

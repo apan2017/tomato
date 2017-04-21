@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   resources :tasks do
     patch :done, on: :member
   end
+
+  resources :users, only: [:create]
+  resources :sessions, only: [:new, :create]
 end
