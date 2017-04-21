@@ -1,11 +1,17 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
 import moment from 'moment'
+import mitt from 'mitt'
+
+export const emitter = mitt()
 
 export const TICKS = 25 * 60
+export const BREAK_TICKS = 5 * 60
+export const tickCount = stream(TICKS)
 
 export const isTicking = stream(false)
 export const isTickDone = stream(false)
+export const isTickBreak = stream(false)
 export const description = stream('')
 
 export const startTime = stream()
@@ -38,10 +44,28 @@ export const create = () => {
     data: data,
     config: xhr => xhr.setRequestHeader('X-CSRF-Token', window.CSRF.token)
   })
-  .then(() => {
-    isTicking(false)
-    isTickDone(false)
-    
-    loadTodayClocks()
-  })
+  .then(() => emitter.emit('created'))
 }
+
+
+emitter.on('tickDone', () => {
+  setTimeout(() => {
+    endTime(moment().format())
+
+    if (tickCount() === TICKS) {
+      isTickDone(true)
+    } else {
+      isTickBreak(false)
+      isTickDone(false)
+      isTicking(false)
+    }
+    
+    m.redraw()
+  }, 0)
+})
+
+emitter.on('created', () => {
+  loadTodayClocks()
+  isTickDone(false)
+  isTickBreak(true)
+})

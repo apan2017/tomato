@@ -2,14 +2,14 @@ import m from 'mithril'
 import stream from 'mithril/stream'
 import moment from 'moment'
 
-import {startTime, endTime, TICKS, isTicking, isTickDone} from 'state/tick'
+import {startTime, endTime, tickCount, isTicking, emitter} from 'state/tick'
 
 const oninit = vnode => {
   startTime(moment().format())
 
   const state = vnode.state
 
-  state.ticks = stream(TICKS)
+  state.ticks = stream(tickCount())
 
   state.stopAClock = e => {
     isTicking(false)
@@ -25,7 +25,7 @@ const oninit = vnode => {
     return <span className="clock-progress--tick">{`${minutes}:${seconds}`}</span>
   })
 
-  state.countProgressPercent = state.ticks.map(v => (TICKS - v) / TICKS * 100)
+  state.countProgressPercent = state.ticks.map(v => (tickCount - v) / tickCount * 100)
 
   let currentTime = (new Date()).getTime()
 
@@ -42,12 +42,7 @@ const oninit = vnode => {
       state.timer = setTimeout(state.countDownTicks, 1000)
     } else {
       state.ticks(0)
-      setTimeout(() => {
-        endTime(moment().format())
-        isTickDone(true)
-        
-        m.redraw()
-      }, 0)
+      emitter.emit('tickDone')
     }
     m.redraw()
   }

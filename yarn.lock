@@ -2505,6 +2505,10 @@ mithril@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/mithril/-/mithril-1.1.1.tgz#0c98644c90503eec2187f66a851ba4053c4a5d66"
 
+mitt@^1.1.2:
+  version "1.1.2"
+  resolved "http://registry.npm.taobao.org/mitt/download/mitt-1.1.2.tgz#380e61480d6a615b660f07abb60d51e0a4e4bed6"
+
 mixin-object@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/mixin-object/-/mixin-object-2.0.1.tgz#4fb949441dab182540f1fe035ba60e1947a5e57e"
