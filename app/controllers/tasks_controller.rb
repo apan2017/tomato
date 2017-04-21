@@ -1,11 +1,12 @@
 class TasksController < ApplicationController
+  before_action :require_login
 
   def index
-    @tasks = Task.todo.order(id: :desc)
+    @tasks = current_user.tasks.todo.order(id: :desc)
   end
 
   def create
-    @task = Task.new params.require(:task).permit(:content)
+    @task = current_user.tasks.build params.require(:task).permit(:content)
 
     if @task.save
       head :ok
@@ -15,7 +16,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find params[:id]
+    @task = current_user.tasks.find params[:id]
 
     if @task.update params.require(:task).permit(:content)
       head :ok
@@ -25,7 +26,7 @@ class TasksController < ApplicationController
   end
 
   def done
-    @task = Task.find params[:id]
+    @task = current_user.tasks.find params[:id]
     @task.is_done = true
 
     if @task.save

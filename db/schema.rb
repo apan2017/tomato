@@ -13,18 +13,25 @@
 ActiveRecord::Schema.define(version: 20170421051825) do
 
   create_table "clocks", force: :cascade do |t|
+    t.integer  "user_id",     null: false
     t.text     "description"
     t.datetime "start_at"
     t.datetime "end_at"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["created_at"], name: "index_clocks_on_created_at"
+    t.index ["user_id"], name: "index_clocks_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
+    t.integer  "user_id",                    null: false
     t.text     "content",    default: ""
     t.boolean  "is_done",    default: false, null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.index ["created_at"], name: "index_tasks_on_created_at"
+    t.index ["is_done"], name: "index_tasks_on_is_done"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
