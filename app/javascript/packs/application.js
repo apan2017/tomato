@@ -1,4 +1,5 @@
 require('bootstrap/dist/css/bootstrap.css')
+require('font-awesome/scss/font-awesome.scss')
 
 import m from 'mithril'
 import {main as Main} from 'container'

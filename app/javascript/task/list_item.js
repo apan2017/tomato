@@ -1,12 +1,13 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
 import {update, setDone} from 'state/task'
+import {description as clockDescription} from 'state/tick'
 
 const oninit = vnode => {
   const state = vnode.state
 
   state.isEditing = stream(false)
-  state.content = stream()
+  state.content = stream(vnode.attrs.task.content)
 
   state.startEdit = e => {
     state.isEditing(true)
@@ -33,6 +34,10 @@ const oninit = vnode => {
       })
     }
   }
+
+  state.linkToClockDescription = e => {
+    clockDescription(state.content())
+  }
 }
 
 const view = vnode => {
@@ -42,11 +47,16 @@ const view = vnode => {
   return(
     <li className="clearfix">
       <input type="checkbox" checked={false} onclick={() => setDone(task.id)} />
+
       {state.isEditing() ? 
         <input type="text" oncreate={vnode => state.autoFocus(task, vnode)}
           onblur={e => state.stopEdit(task)} onkeypress={e => state.updateTask(task, e)}
           value={state.content()} oninput={m.withAttr('value', state.content)} /> : 
         <span onclick={state.startEdit}>{task.content}</span>}
+
+        <span className="pull-right">
+          <i class="fa fa-link" onclick={state.linkToClockDescription}></i>
+        </span>
     </li>
   )
 }
