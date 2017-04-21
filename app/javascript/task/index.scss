@@ -27,6 +27,14 @@
     border-bottom: solid #eee 1px;
   }
 
+  input[type="text"] {
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
   input[type="checkbox"] {
     margin-right: 5px;
   }

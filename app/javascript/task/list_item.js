@@ -16,6 +16,8 @@ const oninit = vnode => {
     targetVnode.dom.focus()
     state.content(task.content)
     m.redraw()
+    
+    setTimeout(() => targetVnode.dom.select(), 0)
   }
 
   state.stopEdit = task => {
@@ -38,7 +40,7 @@ const view = vnode => {
   const task = vnode.attrs.task
 
   return(
-    <li>
+    <li className="clearfix">
       <input type="checkbox" checked={false} onclick={() => setDone(task.id)} />
       {state.isEditing() ? 
         <input type="text" oncreate={vnode => state.autoFocus(task, vnode)}
