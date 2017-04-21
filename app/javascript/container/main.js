@@ -5,7 +5,9 @@ import m from 'mithril'
 const view = vnode => {
   return(
     <div className="main-container container">
-      {vnode.children}
+      <div className="flex-container---row flex-container---stack flex-container">
+        {vnode.children}
+      </div>
     </div>
   )
 }

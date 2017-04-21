@@ -4,9 +4,9 @@ import m from 'mithril'
 
 const view = vnode => {
   return(
-    <div className="task-container col-lg-5 col-lg-offset-1">
+    <section className="task-container">
       {vnode.children}
-    </div>
+    </section>
   )
 }
 

@@ -1,4 +1,8 @@
 .task-container {
   padding: 20px;
-  border: solid #bbb 1px;
+
+  @media (min-width: 992px) {
+    box-shadow: 0 0 4px rgba(0, 0, 0, .2);
+    margin: 20px;
+  }
 }

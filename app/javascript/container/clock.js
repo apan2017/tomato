@@ -4,9 +4,9 @@ import m from 'mithril'
 
 const view = vnode => {
   return(
-    <div className="clock-container col-lg-5">
+    <section className="clock-container">
       {vnode.children}
-    </div>
+    </section>
   )
 }
 

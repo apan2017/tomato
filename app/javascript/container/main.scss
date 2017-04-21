@@ -1,3 +1,23 @@
 .main-container {
   margin: 40px 0;
 }
+
+.flex-container {
+  display: flex;
+  &.flex-container---row {
+    flex-direction: row;
+    &>section {
+      flex-grow: 1; 
+    }
+  }
+
+  &.flex-container---stack {
+    flex-direction: column;
+
+    &.flex-container---row {
+      @media (min-width: 992px) {
+        flex-direction: row;
+      }
+    }
+  }
+}

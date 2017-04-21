@@ -9,10 +9,8 @@ m.mount(document.querySelector('#main'), {
   view: vnode => {
     return(
       <Main>
-        <div className="row">
-          <Clock></Clock>
-          <Task></Task>
-        </div>
+        <Clock></Clock>
+        <Task></Task>
       </Main>
     )
   }
