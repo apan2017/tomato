@@ -1,5 +1,6 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
+import {loadData as loadStatistics} from './statistics'
 
 export const content = stream('')
 
@@ -30,6 +31,7 @@ export const create = () => {
   .then(() => {
     content('')
     loadList()
+    loadStatistics()
   })
 }
 

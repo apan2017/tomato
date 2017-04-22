@@ -2,10 +2,11 @@ import m from 'mithril'
 import stream from 'mithril/stream'
 import moment from 'moment'
 import mitt from 'mitt'
+import {loadData as loadStatistics} from './statistics'
 
 export const emitter = mitt()
 
-export const TICKS = 25 * 60
+export const TICKS = 2
 export const BREAK_TICKS = 5 * 60
 export const tickCount = stream(TICKS)
 
@@ -68,4 +69,5 @@ emitter.on('created', () => {
   loadTodayClocks()
   isTickDone(false)
   isTickBreak(true)
+  loadStatistics()
 })
