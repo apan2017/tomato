@@ -33,11 +33,9 @@ export const create = () => {
   })
 }
 
-export const update = (id, content) => {
+export const update = (id, attributes) => {
   const data = {
-    task: {
-      content: content
-    }
+    task: attributes
   }
 
   return m.request({

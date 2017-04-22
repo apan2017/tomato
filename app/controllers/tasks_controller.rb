@@ -18,7 +18,7 @@ class TasksController < ApplicationController
   def update
     @task = current_user.tasks.find params[:id]
 
-    if @task.update params.require(:task).permit(:content)
+    if @task.update params.require(:task).permit(:content, :priority)
       head :ok
     else
       head :internal_server_error

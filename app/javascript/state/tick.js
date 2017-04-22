@@ -5,7 +5,7 @@ import mitt from 'mitt'
 
 export const emitter = mitt()
 
-export const TICKS = 2
+export const TICKS = 25 * 60
 export const BREAK_TICKS = 5 * 60
 export const tickCount = stream(TICKS)
 
