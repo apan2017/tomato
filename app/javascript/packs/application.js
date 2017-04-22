@@ -5,13 +5,17 @@ import m from 'mithril'
 import {main as Main} from 'container'
 import Clock from 'clock'
 import Task from 'task'
+import Statistics from 'statistics'
 
 m.mount(document.querySelector('#main'), {
   view: vnode => {
     return(
       <Main>
-        <Clock></Clock>
-        <Task></Task>
+        <div className="flex-container---row flex-container---stack flex-container">
+          <Clock></Clock>
+          <Task></Task>
+        </div>
+        <Statistics></Statistics>
       </Main>
     )
   }

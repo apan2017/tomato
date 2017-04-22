@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create]
   resources :sessions, only: [:new, :create]
+
+  resources :statistics, only: [:index]
 end
