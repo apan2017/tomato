@@ -1,6 +1,9 @@
 require('bootstrap/dist/css/bootstrap.css')
 require('font-awesome/scss/font-awesome.scss')
 
+window.$ = window.jQuery = require('jquery')
+require('bootstrap/dist/js/bootstrap.js')
+
 import m from 'mithril'
 import {main as Main} from 'container'
 import Clock from 'clock'

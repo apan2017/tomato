@@ -38,6 +38,10 @@ const oninit = vnode => {
   state.linkToClockDescription = e => {
     clockDescription(state.content())
   }
+
+  state.initDropdown = targetVnode => {
+    $(targetVnode.dom).dropdown()
+  }
 }
 
 const view = vnode => {
@@ -54,9 +58,16 @@ const view = vnode => {
           value={state.content()} oninput={m.withAttr('value', state.content)} /> : 
         <span onclick={state.startEdit}>{task.content}</span>}
 
-        <span className="pull-right">
-          <i class="fa fa-link" onclick={state.linkToClockDescription}></i>
-        </span>
+
+        <div className="dropdown task-content--list-dropdown pull-right">
+          <span oncreate={state.initDropdown} data-toggle="dropdown">
+            <i class="fa fa-caret-down"></i>
+          </span>
+          <ul className="dropdown-menu" aria-labelledby="dLabel">
+            <li><a href="javascript:void(0);" onclick={state.linkToClockDescription}>添加到番茄描述</a></li>
+          </ul>
+        </div>
+
     </li>
   )
 }

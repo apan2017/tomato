@@ -41,3 +41,14 @@
     cursor: pointer;
   }
 }
+
+.task-content--list-dropdown {
+  ul {
+    min-width: inherit;
+  }
+  li {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+}
