@@ -1,10 +1,10 @@
 .clock-container {
   padding: 20px;
-  border-bottom: solid 1px #eee;
+  border-bottom: solid 1px #ccc;
 
   @media (min-width: 992px) {
     border-bottom: none;
-    box-shadow: 0 0 4px rgba(0, 0, 0, .2);
-    margin: 20px;
+    border: solid 1px #ccc;
+    margin: 20px 20px 20px 0;
   }
 }

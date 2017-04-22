@@ -9,6 +9,10 @@
     flex-grow: 1;
     border: solid 1px #ccc;
     padding: 10px 20px;
+    cursor: pointer;
+    &:hover, &.active {
+      background-color: #eee;
+    }
   }
 }
 
