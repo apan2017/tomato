@@ -1,7 +1,6 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
 import moment from 'moment'
-import hash from 'object-hash'
 
 export const list = stream([])
 
@@ -38,6 +37,3 @@ export const loadList = () => {
   })
   .then(data => list(data))
 }
-
-export let listHash = stream('')
-export const getListHash = list.map(list => hash(list))
