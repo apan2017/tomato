@@ -1,14 +1,11 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
 import {loadData as loadStatistics} from './statistics'
+import {loadList as loadCalendar} from './calendar'
 
 export const content = stream('')
 
 export const list = stream([])
-
-export const todoList = list.map(all => {
-  return all.filter(t => !t.is_completed)
-})
 
 export const loadList = () => {
   m.request({
@@ -36,6 +33,7 @@ export const create = () => {
     content('')
     loadList()
     loadStatistics()
+    loadCalendar()
   })
 }
 
@@ -52,6 +50,7 @@ export const update = (id, attributes) => {
   })
   .then(() => {
     loadList()
+    loadCalendar()
   })
 }
 
@@ -63,5 +62,6 @@ export const setDone = id => {
   })
   .then(() => {
     loadList()
+    loadCalendar()
   })
 }

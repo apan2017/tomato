@@ -2,38 +2,42 @@ import m from 'mithril'
 import stream from 'mithril/stream'
 import moment from 'moment'
 import hash from 'object-hash'
-import {list as taskList} from 'state/task'
 
-export const list = taskList.map(tasks => {
+export const list = stream([])
+
+export const calendarList = list.map(tasks => {
   const now = moment().format('YYYY-MM-DD hh:mm')
 
-  return tasks.map(t => {
-    let obj = {
-      id: t.id,
-      title: t.content,
-      start: t.created_at,
-      end: t.completed_at,
-      priority: t.priority,
-      is_completed: t.is_completed
-    }
+  tasks.forEach(t => {
+    t.end = t.end || now
 
-    obj.end = t.end || now
-
-    if (obj.is_completed) {
-      obj.borderColor = obj.backgroundColor = '#4db6ac'
-    } else if (obj.priority === 'high') {
-      obj.borderColor = obj.backgroundColor = '#ef5350'
+    if (t.is_completed) {
+      t.borderColor = t.backgroundColor = '#4db6ac'
+    } else if (t.priority === 'high') {
+      t.borderColor = t.backgroundColor = '#ef5350'
     }
-    else if (obj.priority === 'low') {
-      obj.borderColor = obj.backgroundColor = '#e0e0e0'
-      obj.textColor = '#000'
-    } else if (obj.priority === 'normal') {
-      obj.borderColor = obj.backgroundColor = '#03a9f4'
+    else if (t.priority === 'low') {
+      t.borderColor = t.backgroundColor = '#e0e0e0'
+      t.textColor = '#000'
+    } else if (t.priority === 'normal') {
+      t.borderColor = t.backgroundColor = '#03a9f4'
     }
-
-    return obj
   })
+
+  return tasks
 })
 
+export const month = stream(moment().startOf('month'))
+export const monthFormat = month.map(v => v.format('YYYY-MM-DD') )
+
+export const loadList = () => {
+  m.request({
+    method: 'GET',
+    url: '/tasks/days',
+    data: {start: monthFormat()}
+  })
+  .then(data => list(data))
+}
+
 export let listHash = stream('')
-export const getListHash = taskList.map(list => hash(list))
+export const getListHash = list.map(list => hash(list))

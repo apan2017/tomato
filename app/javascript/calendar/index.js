@@ -7,11 +7,11 @@ require('fullcalendar')
 require('fullcalendar/dist/locale/zh-cn')
 
 import m from 'mithril'
-import {list, listHash, getListHash} from 'state/calendar'
+import {calendarList, loadList, listHash, getListHash} from 'state/calendar'
 
 const oncreate = vnode => {
   $(vnode.dom).fullCalendar({
-    events: list()
+    events: calendarList()
   })
 }
 
@@ -20,7 +20,7 @@ const onupdate = vnode => {
   if (listHash() == newHash) return
 
   $(vnode.dom).fullCalendar('removeEvents')
-  $(vnode.dom).fullCalendar('renderEvents', list())
+  $(vnode.dom).fullCalendar('renderEvents', calendarList())
 
   listHash(newHash)
 }
@@ -29,8 +29,8 @@ const view = vnode => {
   return <div></div>
 }
 
-
 module.exports = {
+  oninit: loadList,
   onupdate,
   oncreate,
   view
