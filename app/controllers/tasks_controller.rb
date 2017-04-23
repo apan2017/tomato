@@ -27,12 +27,16 @@ class TasksController < ApplicationController
 
   def done
     @task = current_user.tasks.find params[:id]
-    @task.is_done = true
+    @task.completed_at = Time.zone.now
 
     if @task.save
       head :ok
     else
       head :internal_server_error
     end
+  end
+
+  def all
+    @tasks = current_user.tasks.order(id: :desc)
   end
 end

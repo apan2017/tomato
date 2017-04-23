@@ -4,7 +4,7 @@ class Task < ApplicationRecord
 
   validates :content, presence: true
 
-  scope :todo, -> { where(is_done: false) }
+  scope :todo, -> { where(completed_at: nil) }
 
   enum priority: [:low, :normal, :high]
 end

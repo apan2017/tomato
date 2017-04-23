@@ -1,6 +1,7 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
 import {loadData as loadStatistics} from './statistics'
+import {loadList as loadCalendar} from './calendar'
 
 export const content = stream('')
 
@@ -32,6 +33,7 @@ export const create = () => {
     content('')
     loadList()
     loadStatistics()
+    loadCalendar()
   })
 }
 
@@ -48,6 +50,7 @@ export const update = (id, attributes) => {
   })
   .then(() => {
     loadList()
+    loadCalendar()
   })
 }
 

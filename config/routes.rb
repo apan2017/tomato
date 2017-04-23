@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :tasks do
     patch :done, on: :member
+    get :all, on: :collection
   end
 
   resources :users, only: [:create]

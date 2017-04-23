@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422201343) do
+ActiveRecord::Schema.define(version: 20170423095503) do
 
   create_table "clocks", force: :cascade do |t|
     t.integer  "user_id",     null: false
@@ -24,14 +24,14 @@ ActiveRecord::Schema.define(version: 20170422201343) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.integer  "user_id",                    null: false
-    t.text     "content",    default: ""
-    t.boolean  "is_done",    default: false, null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "priority",   default: 1,     null: false
+    t.integer  "user_id",                   null: false
+    t.text     "content",      default: ""
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "priority",     default: 1,  null: false
+    t.datetime "completed_at"
+    t.index ["completed_at"], name: "index_tasks_on_completed_at"
     t.index ["created_at"], name: "index_tasks_on_created_at"
-    t.index ["is_done"], name: "index_tasks_on_is_done"
     t.index ["priority"], name: "index_tasks_on_priority"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
