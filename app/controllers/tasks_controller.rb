@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :require_login
 
   def index
-    @tasks = current_user.tasks.todo.order(id: :desc)
+    @tasks = current_user.tasks.order(id: :desc)
   end
 
   def create
@@ -34,9 +34,5 @@ class TasksController < ApplicationController
     else
       head :internal_server_error
     end
-  end
-
-  def all
-    @tasks = current_user.tasks.order(id: :desc)
   end
 end
