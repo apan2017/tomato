@@ -9,6 +9,7 @@ import {main as Main} from 'container'
 import Clock from 'clock'
 import Task from 'task'
 import Statistics from 'statistics'
+import Calendar from 'calendar'
 
 m.mount(document.querySelector('#main'), {
   view: vnode => {
@@ -19,6 +20,7 @@ m.mount(document.querySelector('#main'), {
           <Task></Task>
         </div>
         <Statistics></Statistics>
+        <Calendar></Calendar>
       </Main>
     )
   }
