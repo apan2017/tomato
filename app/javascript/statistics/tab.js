@@ -8,13 +8,8 @@ const view = vnode => {
     <ul className="statistics-tab">
       <li>
         <div className="statistics-tab--title">统计</div>
-        <div className="statistics-tab--desc">一周累计</div>
+        <div className="statistics-tab--desc">一周番茄</div>
         <div className="statistics-tab--counter">{data().week_clock_count}</div>
-      </li>
-      <li>
-        <div className="statistics-tab--title">目标</div>
-        <div className="statistics-tab--desc">今日目标</div>
-        <div className="statistics-tab--counter">{data().today_clock_count}/8</div>
       </li>
       <li>
         <div className="statistics-tab--title">番茄</div>
