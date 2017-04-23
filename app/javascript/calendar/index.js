@@ -29,14 +29,15 @@ const onupdate = vnode => {
   list().forEach(t => {
     t.end = t.end || now
 
-    if (t.priority === 'high') {
+    if (t.is_completed) {
+      t.borderColor = t.backgroundColor = '#4db6ac'
+    } else if (t.priority === 'high') {
       t.borderColor = t.backgroundColor = '#ef5350'
     }
     else if (t.priority === 'low') {
       t.borderColor = t.backgroundColor = '#e0e0e0'
       t.textColor = '#000'
-    }
-    else {
+    } else if (t.priority === 'normal') {
       t.borderColor = t.backgroundColor = '#03a9f4'
     }
   })

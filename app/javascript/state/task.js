@@ -62,5 +62,6 @@ export const setDone = id => {
   })
   .then(() => {
     loadList()
+    loadCalendar()
   })
 }
