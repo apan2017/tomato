@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :require_login
 
   def index
-    @tasks = current_user.tasks.todo.order(id: :desc)
+    @tasks = current_user.tasks.todo.order(priority: :desc, id: :desc)
   end
 
   def create
