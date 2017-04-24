@@ -1,6 +1,7 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
 import moment from 'moment'
+import {emitter as TaskEmitter} from './task'
 
 export const list = stream([])
 
@@ -37,3 +38,6 @@ export const loadList = () => {
   })
   .then(data => list(data))
 }
+
+TaskEmitter.on('create', loadList)
+TaskEmitter.on('update', loadList)

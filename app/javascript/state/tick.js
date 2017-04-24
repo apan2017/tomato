@@ -2,7 +2,6 @@ import m from 'mithril'
 import stream from 'mithril/stream'
 import moment from 'moment'
 import mitt from 'mitt'
-import {loadData as loadStatistics} from './statistics'
 
 export const emitter = mitt()
 
@@ -45,7 +44,7 @@ export const create = () => {
     data: data,
     config: xhr => xhr.setRequestHeader('X-CSRF-Token', window.CSRF.token)
   })
-  .then(() => emitter.emit('created'))
+  .then(() => emitter.emit('create'))
 }
 
 
@@ -65,9 +64,8 @@ emitter.on('tickDone', () => {
   }, 0)
 })
 
-emitter.on('created', () => {
+emitter.on('create', () => {
   loadTodayClocks()
   isTickDone(false)
   isTickBreak(true)
-  loadStatistics()
 })

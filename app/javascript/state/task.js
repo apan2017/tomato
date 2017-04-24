@@ -1,7 +1,8 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
-import {loadData as loadStatistics} from './statistics'
-import {loadList as loadCalendar} from './calendar'
+import mitt from 'mitt'
+
+export const emitter = mitt()
 
 export const content = stream('')
 
@@ -29,11 +30,10 @@ export const create = () => {
     data: data,
     config: xhr => xhr.setRequestHeader('X-CSRF-Token', window.CSRF.token)
   })
+  .then(() => emitter.emit('create'))
   .then(() => {
     content('')
     loadList()
-    loadStatistics()
-    loadCalendar()
   })
 }
 
@@ -48,10 +48,8 @@ export const update = (id, attributes) => {
     data: data,
     config: xhr => xhr.setRequestHeader('X-CSRF-Token', window.CSRF.token)
   })
-  .then(() => {
-    loadList()
-    loadCalendar()
-  })
+  .then(() => emitter.emit('update'))
+  .then(loadList)
 }
 
 export const setDone = id => {
@@ -60,8 +58,6 @@ export const setDone = id => {
     url: `/tasks/${id}/done`,
     config: xhr => xhr.setRequestHeader('X-CSRF-Token', window.CSRF.token)
   })
-  .then(() => {
-    loadList()
-    loadCalendar()
-  })
+  .then(() => emitter.emit('update'))
+  .then(loadList)
 }
