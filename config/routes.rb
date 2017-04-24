@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
+  get 'me' => 'users#me', as: :me
+  get 'signin' => 'sessions#new', as: :signin
+  delete 'signout' => 'sessions#destroy', as: :signout
+
   resources :clocks do
     get :today, on: :collection
   end
@@ -11,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:create]
-  resources :sessions, only: [:new, :create]
+  resources :sessions, only: [:create]
 
   resources :statistics, only: [:index]
 end

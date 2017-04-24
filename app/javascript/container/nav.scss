@@ -1,0 +1,13 @@
+.nav {
+  margin-bottom: 20px !important;
+  padding: 5px 0;
+  border-bottom: solid 1px #e1e1e1;
+}
+
+$font-color: #888;
+
+.profile-btn {
+  button {
+    color: $font-color;
+  }
+}

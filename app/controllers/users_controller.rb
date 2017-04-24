@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_login, except: [:create]
 
   def create
     @user = User.new params.require(:user).permit(:email, :password, :password_confirmation)
@@ -8,5 +9,8 @@ class UsersController < ApplicationController
     else
       render json: @user.errors, status: :internal_server_error
     end
+  end
+
+  def me
   end
 end
