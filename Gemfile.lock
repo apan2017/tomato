@@ -54,6 +54,7 @@ GEM
     byebug (9.0.6)
     concurrent-ruby (1.0.5)
     erubis (2.7.0)
+    execjs (2.7.0)
     faraday (0.11.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
@@ -144,6 +145,8 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
+    uglifier (3.2.0)
+      execjs (>= 0.3.0, < 3)
     web-console (3.5.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -167,6 +170,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
+  uglifier
   web-console (>= 3.3.0)
   webpacker!
 

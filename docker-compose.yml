@@ -1,0 +1,21 @@
+app:
+  build: .
+  dockerfile: dockerize/Dockerfile-app
+  command: foreman start
+  links:
+    - db:db
+db:
+  image: postgres:9.6
+  volumes_from:
+    - db_data
+db_data:
+  image: postgres
+  volumes:
+    - /var/lib/postgresql/data
+web:
+  build: .
+  dockerfile: dockerize/Dockerfile-nginx
+  links:
+    - app:app
+  ports:
+    - 80:80
