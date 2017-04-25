@@ -6,19 +6,18 @@ import {clock as Container} from 'container'
 import Process from './process'
 import Content from './content'
 import Form from './form'
-import {isTicking, isTickDone, isTickBreak, TICKS, BREAK_TICKS, tickCount} from 'state/tick'
+import {isTicking, isTickDone, isTickBreak, emitter} from 'state/tick'
 
 const oninit = vnode => {
   const state = vnode.state
 
   state.startAClock = e => {
-    isTicking(true)
+    emitter.emit('tickStart')
   }
 }
 
 const renderHeader = vnode => {
   if (isTickBreak()) {
-    tickCount(BREAK_TICKS)
     return <Process></Process>
   }
 
@@ -27,7 +26,6 @@ const renderHeader = vnode => {
   }
 
   if (isTicking()) {
-    tickCount(TICKS)
     return <Process></Process>
   }
   

@@ -8,6 +8,7 @@ export const emitter = mitt()
 export const TICKS = 25 * 60
 export const BREAK_TICKS = 5 * 60
 export const tickCount = stream(TICKS)
+export const currentTickCount = tickCount.map(v => v)
 
 export const isTicking = stream(false)
 export const isTickDone = stream(false)
@@ -44,28 +45,74 @@ export const create = () => {
     data: data,
     config: xhr => xhr.setRequestHeader('X-CSRF-Token', window.CSRF.token)
   })
-  .then(() => emitter.emit('create'))
+  .then(() => emitter.emit('tickBreak'))
 }
 
+// store
+
+const storeState = currentTickCount => {
+  localStorage['tick_state'] = JSON.stringify({
+    isTicking: isTicking(),
+    isTickDone: isTickDone(),
+    isTickBreak: isTickBreak(),
+    tickCount: tickCount(),
+    currentTickCount: currentTickCount
+  })
+}
+
+const loadStoredState = () => {
+  if (!localStorage['tick_state']) return
+
+  const state = JSON.parse(localStorage['tick_state'])
+  isTicking(state.isTicking)
+  isTickDone(state.isTickDone)
+  isTickBreak(state.isTickBreak)
+  tickCount(state.tickCount)
+  currentTickCount(state.currentTickCount)
+}
+
+const removeStoredState = () => {
+  localStorage.removeItem('tick_state')
+}
+
+loadStoredState()
+
+// events
+
+emitter.on('tickStart', () => {
+  tickCount(TICKS)
+  isTicking(true)
+})
+
+emitter.on('tickProcess', i => {
+  storeState(i)
+})
+
+emitter.on('tickStop', () => {
+  isTicking(false)
+  removeStoredState()
+})
 
 emitter.on('tickDone', () => {
   setTimeout(() => {
     endTime(moment().format())
 
-    if (tickCount() === TICKS) {
+    if (tickCount() === TICKS) { // ready to create a tomato
       isTickDone(true)
-    } else {
+    } else {                     // relax
       isTickBreak(false)
       isTickDone(false)
       isTicking(false)
+      removeStoredState()
     }
     
     m.redraw()
   }, 0)
 })
 
-emitter.on('create', () => {
+emitter.on('tickBreak', () => {
   loadTodayClocks()
   isTickDone(false)
   isTickBreak(true)
+  tickCount(BREAK_TICKS)
 })
