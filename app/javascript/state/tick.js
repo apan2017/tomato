@@ -3,6 +3,9 @@ import stream from 'mithril/stream'
 import moment from 'moment'
 import mitt from 'mitt'
 
+const oggtick = new Audio(require('assets/tick1.ogg'))
+const oggalarm = new Audio(require('assets/alarm1.ogg'))
+
 export const emitter = mitt()
 
 export const TICKS = 25 * 60
@@ -80,17 +83,25 @@ loadStoredState()
 // events
 
 emitter.on('tickStart', () => {
+  oggalarm.pause()
+  removeStoredState()
   tickCount(TICKS)
   isTicking(true)
 })
 
 emitter.on('tickProcess', i => {
+  oggtick.play()
+  setTimeout(() => {
+    oggtick.pause()
+    oggtick.load()
+  }, 500)
   storeState(i)
 })
 
 emitter.on('tickStop', () => {
   isTicking(false)
   removeStoredState()
+  oggtick.pause()
 })
 
 emitter.on('tickDone', () => {
@@ -103,9 +114,14 @@ emitter.on('tickDone', () => {
       isTickBreak(false)
       isTickDone(false)
       isTicking(false)
-      removeStoredState()
     }
-    
+
+    removeStoredState()
+
+    oggtick.pause()
+    oggalarm.load()
+    oggalarm.play()
+
     m.redraw()
   }, 0)
 })
@@ -115,4 +131,5 @@ emitter.on('tickBreak', () => {
   isTickDone(false)
   isTickBreak(true)
   tickCount(BREAK_TICKS)
+  oggalarm.pause()
 })
