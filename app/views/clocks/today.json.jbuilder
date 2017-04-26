@@ -1,4 +1,4 @@
-json.created_data Date.today.strftime('%m-%d')
+json.created_date Date.today.strftime('%m-%d')
 json.total_count @clocks.size
 
 json.set! :clocks do

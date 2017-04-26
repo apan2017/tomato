@@ -1,0 +1,5 @@
+today_clock:
+  user: user_one
+  description: <%= Faker::Lorem.word %>
+  start_at: <%= Time.zone.now %>
+  end_at: <%= Time.zone.now + 25.minute %>

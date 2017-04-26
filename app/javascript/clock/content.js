@@ -14,7 +14,7 @@ const renderContent = () => {
     <div className="clock-content--block">
       <div className="clock-content--header clearfix">
         <span className="clock-content--date pull-left">
-          {today.created_data}
+          {today.created_date}
         </span>
         <span className="clock-content--total pull-right">
           {`完成了 ${today.total_count} 个番茄`}
