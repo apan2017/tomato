@@ -1,6 +1,7 @@
 import m from 'mithril'
 import stream from 'mithril/stream'
 import moment from 'moment'
+import hash from 'object-hash'
 import {emitter as TaskEmitter} from './task'
 
 export const list = stream([])
@@ -37,7 +38,15 @@ export const loadList = () => {
     data: {start: monthFormat()}
   })
   .then(data => list(data))
+  .then(() => hasReloadList = true)
 }
 
 TaskEmitter.on('create', loadList)
 TaskEmitter.on('update', loadList)
+
+let hasReloadList = false
+export const canUpdateVnode = () => {
+  let _hasReloadList = hasReloadList
+  hasReloadList = false
+  return _hasReloadList
+}

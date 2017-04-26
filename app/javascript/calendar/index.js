@@ -7,7 +7,7 @@ require('fullcalendar')
 require('fullcalendar/dist/locale/zh-cn')
 
 import m from 'mithril'
-import {calendarList, month, loadList, listHash, getListHash} from 'state/calendar'
+import {calendarList, month, loadList, canUpdateVnode} from 'state/calendar'
 
 const oncreate = vnode => {
   $(vnode.dom).fullCalendar({
@@ -34,6 +34,7 @@ const view = vnode => {
 
 module.exports = {
   oninit: loadList,
+  onbeforeupdate: canUpdateVnode,
   onupdate,
   oncreate,
   view
