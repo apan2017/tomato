@@ -43,3 +43,4 @@ end
 gem 'webpacker', github: 'rails/webpacker'
 gem 'sorcery'
 gem 'foreman'
+gem 'eye'
