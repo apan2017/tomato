@@ -33,8 +33,21 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "processes"
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-namespace :deploy do
+# Fixed: https://tom.meinlschmidt.org/2014/01/31/capistrano3-run-gem-binary/
+set :rvm_remap_bins, %w{eye}
 
+namespace :settings do
+  task :prefix_rake do
+    fetch(:rvm_remap_bins).each do |cmd|
+      SSHKit.config.command_map[cmd.to_sym] = "#{SSHKit.config.command_map[:gem].gsub(/gem$/,'')} #{cmd}"
+    end
+  end
+end
+
+after 'rvm:hook', 'settings:prefix_rake'
+
+
+namespace :deploy do
   task :start do
     on roles(:app) do
       execute :eye, "start app"
@@ -59,7 +72,6 @@ namespace :deploy do
       execute :eye, "load config/app.eye"
     end
   end
-
 end
 
 before "deploy:restart", "deploy:load_eye"
