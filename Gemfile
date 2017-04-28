@@ -44,3 +44,10 @@ gem 'webpacker', github: 'rails/webpacker'
 gem 'sorcery'
 gem 'foreman'
 gem 'eye'
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rvm'
+end
